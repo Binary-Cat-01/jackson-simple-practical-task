@@ -14,6 +14,7 @@ public class Car {
 
     private List<Fine> unpaidFine;
 
+    /*Технические поля, которые мы не хотим сериализовать*/
     private LocalDateTime created;
     private LocalDateTime updated;
 

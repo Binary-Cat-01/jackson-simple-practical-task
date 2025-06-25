@@ -1,0 +1,34 @@
+[ {
+  "id" : "1",
+  "year" : 2000,
+  "color" : "BLACK",
+  "isActualTechnicalInspection" : true,
+  "lastTechnicalInspection" : "2025-06-25T13:51:52.3396039",
+  "unpaidFine" : [ {
+    "id" : "1",
+    "isPaid" : false,
+    "someNullField" : null
+  }, {
+    "id" : "2",
+    "isPaid" : false,
+    "someNullField" : null
+  } ]
+}, {
+  "id" : "2",
+  "year" : 2020,
+  "color" : "WHITE",
+  "isActualTechnicalInspection" : false,
+  "lastTechnicalInspection" : "2025-06-25T13:51:52.3396039",
+  "unpaidFine" : [ {
+    "id" : "2",
+    "isPaid" : false,
+    "someNullField" : null
+  } ]
+}, {
+  "id" : null,
+  "year" : 1990,
+  "color" : null,
+  "isActualTechnicalInspection" : true,
+  "lastTechnicalInspection" : null,
+  "unpaidFine" : null
+} ]
