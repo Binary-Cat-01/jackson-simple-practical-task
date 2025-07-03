@@ -8,6 +8,9 @@ public class Fine {
     private boolean isPaid;
     private Object someNullField;
 
+    public Fine() {
+    }
+
     public Fine(String id, boolean isPaid) {
         this.id = id;
         this.isPaid = isPaid;

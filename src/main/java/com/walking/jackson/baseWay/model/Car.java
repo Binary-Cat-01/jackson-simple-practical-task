@@ -18,6 +18,9 @@ public class Car {
     private LocalDateTime created;
     private LocalDateTime updated;
 
+    public Car() {
+    }
+
     public Car(String id, int year, Color color, boolean isActualTechnicalInspection,
             LocalDateTime lastTechnicalInspection, List<Fine> unpaidFine) {
         this.id = id;
