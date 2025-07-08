@@ -1,10 +1,11 @@
 package com.walking.jackson.baseWay.repository;
 
 import com.fasterxml.jackson.core.JsonFactory;
-import com.walking.jackson.baseWay.model.Car;
-import com.walking.jackson.baseWay.model.Color;
-import com.walking.jackson.baseWay.model.Fine;
-import com.walking.jackson.baseWay.util.JsonCarSerializer;
+import com.walking.jackson.model.Car;
+import com.walking.jackson.model.Color;
+import com.walking.jackson.model.Fine;
+import com.walking.jackson.repository.imperative.CarRepository;
+import com.walking.jackson.util.JsonCarImperativeSerializer;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarRepositoryTest {
-    private final CarRepository carRepository = new CarRepository(new JsonCarSerializer(new JsonFactory()));
+    private final CarRepository carRepository = new CarRepository(new JsonCarImperativeSerializer(new JsonFactory()));
 
     /**
      * Это видимо уже ближе к интеграционному тесту?*/
