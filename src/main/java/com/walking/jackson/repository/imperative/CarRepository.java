@@ -1,36 +1,45 @@
-package com.walking.jackson.baseWay.repository;
+package com.walking.jackson.repository.imperative;
 
-import com.walking.jackson.baseWay.model.Car;
-import com.walking.jackson.baseWay.util.JsonCarSerializer;
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.walking.jackson.model.Car;
+import com.walking.jackson.util.JsonCarImperativeDeserializer;
+import com.walking.jackson.util.JsonCarImperativeSerializer;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 
 public class CarRepository {
     private final Path path = Path.of("./src/main/resources/cars(imperative).json");
-    private final JsonCarSerializer serializer;
+    private final JsonFactory jsonFactory;
+    private final JsonCarImperativeSerializer serializer;
+    private final JsonCarImperativeDeserializer deserializer;
 
-    public CarRepository(JsonCarSerializer serializer) {
+    public CarRepository(JsonFactory factory, JsonCarImperativeSerializer serializer,
+            JsonCarImperativeDeserializer deserializer) {
+        this.jsonFactory = factory;
         this.serializer = serializer;
+        this.deserializer = deserializer;
     }
 
     public void write(Collection<Car> cars) {
-        try (OutputStream outputStream = new BufferedOutputStream(Files.newOutputStream(path))) {
+        try (var generator = jsonFactory.createGenerator(path.toFile(), JsonEncoding.UTF8)) {
+            /*используем "человекочитаемое" форматирование, чтобы полюбоваться получившимся json*/
+            generator.useDefaultPrettyPrinter();
 
-            serializer.serialize(cars, outputStream);
+            serializer.serialize(cars, generator);
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при записи файла %s".formatted(path.getFileName()));
+            throw new RuntimeException("Ошибка при записи файла %s".formatted(path.getFileName()), e);
         }
     }
 
     public Collection<Car> read() {
-        try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(path))) {
+        try (var parser = jsonFactory.createParser(path.toFile())) {
 
-            return serializer.deserialize(inputStream);
+            return deserializer.deserialize(parser);
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при чтении файла %s".formatted(path.getFileName()));
+            throw new RuntimeException("Ошибка при чтении файла %s".formatted(path.getFileName()), e);
         }
     }
 }

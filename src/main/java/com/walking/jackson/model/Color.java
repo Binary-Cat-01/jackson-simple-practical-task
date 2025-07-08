@@ -1,4 +1,4 @@
-package com.walking.jackson.baseWay.model;
+package com.walking.jackson.model;
 
 public enum Color {
     WHITE, BLACK

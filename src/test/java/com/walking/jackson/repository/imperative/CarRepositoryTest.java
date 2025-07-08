@@ -1,10 +1,10 @@
-package com.walking.jackson.baseWay.repository;
+package com.walking.jackson.repository.imperative;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.walking.jackson.model.Car;
 import com.walking.jackson.model.Color;
 import com.walking.jackson.model.Fine;
-import com.walking.jackson.repository.imperative.CarRepository;
+import com.walking.jackson.util.JsonCarImperativeDeserializer;
 import com.walking.jackson.util.JsonCarImperativeSerializer;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +16,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarRepositoryTest {
-    private final CarRepository carRepository = new CarRepository(new JsonCarImperativeSerializer(new JsonFactory()));
+    private final JsonFactory jsonFactory = new JsonFactory();
+    private final JsonCarImperativeSerializer serializer = new JsonCarImperativeSerializer();
+    private final JsonCarImperativeDeserializer deserializer = new JsonCarImperativeDeserializer();
+
+    private final CarRepository carRepository =
+            new CarRepository(jsonFactory, serializer, deserializer);
 
     /**
-     * Это видимо уже ближе к интеграционному тесту?*/
+     * Это видимо уже ближе к интеграционному тесту?
+     */
     @Test
     void cars_after_read_equals_cars_before_write() {
 //        given:
@@ -42,8 +48,7 @@ class CarRepositoryTest {
         cars.add(new Car("2", 2020, Color.WHITE, false, LocalDateTime.now(),
                 List.of(new Fine("2", false))));
 
-        cars.add(new Car(null, 1990, Color.BLACK, true, null,
-                null));
+        cars.add(new Car(null, 1990, Color.BLACK, true, null, null));
 
         return cars;
     }

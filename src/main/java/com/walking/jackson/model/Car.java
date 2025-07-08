@@ -1,4 +1,4 @@
-package com.walking.jackson.baseWay.model;
+package com.walking.jackson.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
