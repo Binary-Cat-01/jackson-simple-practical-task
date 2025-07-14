@@ -49,13 +49,14 @@ public class Fine {
             return false;
         }
 
-        return isPaid == fine.isPaid && id.equals(fine.id) && Objects.equals(someNullField,
-                fine.someNullField);
+        return isPaid == fine.isPaid && id.equals(fine.id);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        int result = Objects.hashCode(id);
+        result = 31 * result + Boolean.hashCode(isPaid);
+        return result;
     }
 
     @Override

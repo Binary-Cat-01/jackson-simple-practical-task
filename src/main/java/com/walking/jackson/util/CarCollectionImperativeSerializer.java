@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class JsonCarImperativeSerializer {
+public class CarCollectionImperativeSerializer {
     public void serialize(Collection<Car> cars, JsonGenerator jsonGenerator) throws IOException {
         jsonGenerator.writeStartArray();
 
@@ -34,7 +34,7 @@ public class JsonCarImperativeSerializer {
 
         generateLastTechnicalInspection(car.getLastTechnicalInspection(), jsonGenerator);
 
-        generateUnpaidFines(car.getUnpaidFine(), jsonGenerator);
+        generateUnpaidFines(car.getUnpaidFines(), jsonGenerator);
 
         jsonGenerator.writeEndObject();
     }
@@ -61,16 +61,16 @@ public class JsonCarImperativeSerializer {
         }
     }
 
-    private void generateUnpaidFines(Collection<Fine> fines, JsonGenerator jsonGenerator) throws
+    private void generateUnpaidFines(Collection<Fine> unpaidFines, JsonGenerator jsonGenerator) throws
             IOException {
-        jsonGenerator.writeFieldName("unpaidFine");
+        jsonGenerator.writeFieldName("unpaidFines");
 
-        if (fines == null) {
+        if (unpaidFines == null) {
             jsonGenerator.writeNull();
         } else {
             jsonGenerator.writeStartArray();
 
-            for (Fine fine : fines) {
+            for (Fine fine : unpaidFines) {
                 generateFine(fine, jsonGenerator);
             }
 

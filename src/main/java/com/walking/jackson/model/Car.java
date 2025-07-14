@@ -12,7 +12,7 @@ public class Car {
     private boolean isActualTechnicalInspection;
     private LocalDateTime lastTechnicalInspection;
 
-    private List<Fine> unpaidFine;
+    private List<Fine> unpaidFines;
 
     /*Технические поля, которые мы не хотим сериализовать*/
     private LocalDateTime created;
@@ -22,13 +22,13 @@ public class Car {
     }
 
     public Car(String id, int year, Color color, boolean isActualTechnicalInspection,
-            LocalDateTime lastTechnicalInspection, List<Fine> unpaidFine) {
+            LocalDateTime lastTechnicalInspection, List<Fine> unpaidFines) {
         this.id = id;
         this.year = year;
         this.color = color;
         this.isActualTechnicalInspection = isActualTechnicalInspection;
         this.lastTechnicalInspection = lastTechnicalInspection;
-        this.unpaidFine = unpaidFine;
+        this.unpaidFines = unpaidFines;
     }
 
     public String getId() {
@@ -51,8 +51,8 @@ public class Car {
         return lastTechnicalInspection;
     }
 
-    public List<Fine> getUnpaidFine() {
-        return unpaidFine;
+    public List<Fine> getUnpaidFines() {
+        return unpaidFines;
     }
 
     public void setId(String id) {
@@ -75,8 +75,8 @@ public class Car {
         this.lastTechnicalInspection = lastTechnicalInspection;
     }
 
-    public void setUnpaidFine(List<Fine> unpaidFine) {
-        this.unpaidFine = unpaidFine;
+    public void setUnpaidFines(List<Fine> unpaidFines) {
+        this.unpaidFines = unpaidFines;
     }
 
     @Override
@@ -90,8 +90,8 @@ public class Car {
 
         return year == car.year && isActualTechnicalInspection == car.isActualTechnicalInspection
                 && Objects.equals(id, car.id) && color == car.color && Objects.equals(
-                lastTechnicalInspection, car.lastTechnicalInspection) && Objects.equals(unpaidFine,
-                car.unpaidFine);
+                lastTechnicalInspection, car.lastTechnicalInspection) && Objects.equals(unpaidFines,
+                car.unpaidFines);
     }
 
     @Override
@@ -104,6 +104,6 @@ public class Car {
         return "Car{" + "id='" + id + '\'' + ", year=" + year + ", color=" + color
                 + ", isActualTechnicalInspection=" + isActualTechnicalInspection
                 + ", lastTechnicalInspection=" + lastTechnicalInspection + ", unpaidFine="
-                + unpaidFine + '}';
+                + unpaidFines + '}';
     }
 }

@@ -4,8 +4,9 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.walking.jackson.model.Car;
 import com.walking.jackson.model.Color;
 import com.walking.jackson.model.Fine;
-import com.walking.jackson.util.JsonCarImperativeDeserializer;
-import com.walking.jackson.util.JsonCarImperativeSerializer;
+import com.walking.jackson.util.CarCollectionImperativeDeserializer;
+import com.walking.jackson.util.CarCollectionImperativeSerializer;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -17,15 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CarRepositoryTest {
     private final JsonFactory jsonFactory = new JsonFactory();
-    private final JsonCarImperativeSerializer serializer = new JsonCarImperativeSerializer();
-    private final JsonCarImperativeDeserializer deserializer = new JsonCarImperativeDeserializer();
+    private final CarCollectionImperativeSerializer serializer = new CarCollectionImperativeSerializer();
+    private final CarCollectionImperativeDeserializer deserializer = new CarCollectionImperativeDeserializer();
 
-    private final CarRepository carRepository =
-            new CarRepository(jsonFactory, serializer, deserializer);
+    private final CarRepository carRepository = new CarRepository(jsonFactory, serializer, deserializer);
 
-    /**
-     * Это видимо уже ближе к интеграционному тесту?
-     */
     @Test
     void cars_after_read_equals_cars_before_write() {
 //        given:
@@ -33,6 +30,7 @@ class CarRepositoryTest {
 
 //        when:
         carRepository.write(expected);
+
         var actual = carRepository.read();
 
 //        then:

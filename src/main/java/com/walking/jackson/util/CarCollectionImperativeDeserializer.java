@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class JsonCarImperativeDeserializer {
+public class CarCollectionImperativeDeserializer {
     public Collection<Car> deserialize(JsonParser jsonParser) throws IOException {
         Collection<Car> cars = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class JsonCarImperativeDeserializer {
                 case "color" -> car.setColor(parseColor(jsonParser));
                 case "isActualTechnicalInspection" ->
                         car.setActualTechnicalInspection(jsonParser.getBooleanValue());
-                case "unpaidFine" -> car.setUnpaidFine(parseUnpaidFines(jsonParser));
+                case "unpaidFines" -> car.setUnpaidFines(parseUnpaidFines(jsonParser));
                 case "lastTechnicalInspection" ->
                         car.setLastTechnicalInspection(parseLastTechnicalInspection(jsonParser));
 
@@ -61,15 +61,15 @@ public class JsonCarImperativeDeserializer {
     }
 
     private List<Fine> parseUnpaidFines(JsonParser jsonParser) throws IOException {
-        List<Fine> fines = new ArrayList<>();
-
         if (jsonParser.currentToken() == JsonToken.VALUE_NULL) {
-            return fines;
+            return null;
         }
 
         if (jsonParser.currentToken() != JsonToken.START_ARRAY) {
             throw new IOException("Unexpected token");
         }
+
+        List<Fine> fines = new ArrayList<>();
 
         while (jsonParser.nextToken() != JsonToken.END_ARRAY) {
             fines.add(parseFine(jsonParser));
